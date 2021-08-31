@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'checkstyle'
+    id 'pmd'
+    id 'com.github.spotbugs' version "${spotbugsVersion}"
+}
+
+group = 'by.suixela'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    getMainClass().set('by.suixela.Main')
+}
+
+compileJava   {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
+
+spotbugs {
+    getExcludeFilter().set(file("$projectDir/config/spotbugs/spotbugs-exclude.xml"))
+}
+
+dependencies {
+    implementation "org.apache.logging.log4j:log4j-api:${log4jVersion}"
+    implementation "org.apache.logging.log4j:log4j-core:${log4jVersion}"
+    implementation "org.apache.commons:commons-lang3:${commonsVersion}"
+}
